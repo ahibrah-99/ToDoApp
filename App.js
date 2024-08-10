@@ -2,9 +2,10 @@ import { StatusBar } from 'expo-status-bar';
 import { StyleSheet, Text, View } from 'react-native';
 
 export default function App() {
+  const welcomeMsg = "Hello World! Testing Message...";
   return (
     <View style={styles.container}>
-      <Text>Open up App.js to start working on your app!</Text>
+      <Text> {welcomeMsg} </Text>
       <StatusBar style="auto" />
     </View>
   );
