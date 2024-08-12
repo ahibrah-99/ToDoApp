@@ -5,10 +5,16 @@ import { StatusBar } from 'expo-status-bar';
 import { 
   StyleSheet,
   Text, 
-  View } from 'react-native';
+  View,
+  TextInput,
+  TouchableOpacity,
+  FlatList } from 'react-native';
 
 // Import task class
 import task from 'task.js';
+
+// Import useState and useEffect from react
+import React, {useState, useEffect} from 'react';
 
 export default function App() {
   const welcomeMsg = "Hello World! Testing Message...";
