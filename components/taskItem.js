@@ -1,33 +1,24 @@
 import React from 'react';
 import { View, Text, TouchableOpacity, StyleSheet } from 'react-native';
 
-const renderTaskItem = ({item, index}) => {
-    
+const TaskItem = ({ item, index, markTaskDone, editTask, deleteTask }) => {
     return (
-    <View style={styles.task}>
-            <Text
-                style={styles.itemList}>{item.label}</Text>
-            <View
-                style={styles.taskButtons}>
-                <TouchableOpacity
-                    onPress={() => markTaskDone(index)}>
-                    <Text
-                        style={styles.editButton}>Done</Text>
+        <View style={styles.task}>
+            <Text style={styles.itemList}>{item.label}</Text>
+            <View style={styles.taskButtons}>
+                <TouchableOpacity onPress={() => markTaskDone(index)}>
+                    <Text style={styles.editButton}>Done</Text>
                 </TouchableOpacity>
-                <TouchableOpacity
-                    onPress={() => editTask(index)}>
-                    <Text
-                        style={styles.editButton}>Edit</Text>
+                <TouchableOpacity onPress={() => editTask(index)}>
+                    <Text style={styles.editButton}>Edit</Text>
                 </TouchableOpacity>
-                <TouchableOpacity
-                    onPress={() => deleteTask(index)}>
-                    <Text
-                        style={styles.deleteButton}>Delete</Text>
+                <TouchableOpacity onPress={() => deleteTask(index)}>
+                    <Text style={styles.deleteButton}>Delete</Text>
                 </TouchableOpacity>
             </View>
         </View>
-    )
-}
+    );
+};
 
 const styles = StyleSheet.create({
     task: {
@@ -55,6 +46,5 @@ const styles = StyleSheet.create({
         fontSize: 18,
     },
 });
-
 
 export default TaskItem;
