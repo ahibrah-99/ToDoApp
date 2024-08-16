@@ -1,14 +1,25 @@
-import React from 'react';
+import React, {useState} from 'react';
 import { View, Text, TouchableOpacity, StyleSheet } from 'react-native';
 
 const TaskItem = ({ item, index, markTaskDone, editTask, deleteTask }) => {
+
+    const [isDoneButtonVisible, setDoneButtonVisible] = useState(true);
+
+    function handle_markTaskDone() {
+        markTaskDone(index);
+        setDoneButtonVisible(false);
+    }
+
     return (
         <View style={styles.task}>
+            <Text style={styles.itemList}>{!isDoneButtonVisible && '✅'}</Text>
             <Text style={styles.itemList}>{item.label}</Text>
             <View style={styles.taskButtons}>
-                <TouchableOpacity onPress={() => markTaskDone(index)}>
-                    <Text style={styles.editButton}>Done</Text>
-                </TouchableOpacity>
+                {isDoneButtonVisible && (
+                    <TouchableOpacity onPress={handle_markTaskDone}>
+                        <Text style={styles.editButton}>Done</Text>
+                    </TouchableOpacity>
+                )}
                 <TouchableOpacity onPress={() => editTask(index)}>
                     <Text style={styles.editButton}>Edit</Text>
                 </TouchableOpacity>
@@ -30,9 +41,11 @@ const styles = StyleSheet.create({
     },
     itemList: {
         fontSize: 19,
+        marginRight: 5
     },
     taskButtons: {
         flexDirection: "row",
+        padding: 20
     },
     editButton: {
         marginRight: 10,

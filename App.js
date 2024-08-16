@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { StyleSheet, Text, View, TextInput, TouchableOpacity, FlatList } from 'react-native';
+import { StyleSheet, Text, View, TextInput, TouchableOpacity, FlatList , Image} from 'react-native';
 import Task from './components/Task';
 import TaskItem from './components/taskItem';
 
@@ -21,6 +21,7 @@ export default function App() {
         setTasks([...tasks, new Task(task)]);
       }
       setTaskLabel('');
+      console.log('A task has been added!');
     }
   }
 
@@ -29,13 +30,16 @@ export default function App() {
     const taskToEdit = tasks[index];
     setTaskLabel(taskToEdit.label);
     setEditIndex(index);
+    console.log('A task has been edited!');
   }
 
   // Mark task as done
   function markTaskDone(index) {
     const updatedTasks = [...tasks];
     updatedTasks[index].status = 1;
+    //updatedTasks[index].label = updatedTasks[index].label + '  ✅';
     setTasks(updatedTasks);
+    console.log('A task has been marked as done!');
   }
 
   // Delete task
@@ -43,10 +47,12 @@ export default function App() {
     const updatedTasks = [...tasks];
     updatedTasks.splice(index, 1);
     setTasks(updatedTasks);
+    console.log('A task has been deleted!');
   }
 
   return (
   <View style={styles.container}>
+    <Image style={styles.Image} source={require("./imgs/ToDoIMG.png")}/>
     <Text style={styles.heading}>My ToDo List</Text>
     <TextInput
       style={styles.input}
@@ -82,11 +88,16 @@ const styles = StyleSheet.create({
   container: {
   flex: 1,
   padding: 40,
-  marginTop: 40,
+  marginTop: 20,
   backgroundColor: '#fff',
   alignItems: 'center',
   justifyContent: 'center',
   alignSelf: 'stretch',
+  },
+  Image: {
+    padding: 20,
+    width: 80,
+    height: 100,
   },
   heading: {
   fontSize: 30,
@@ -101,6 +112,7 @@ const styles = StyleSheet.create({
   marginBottom: 10,
   borderRadius: 10,
   fontSize: 18,
+  width: '70%'
   },
   addButton: {
   backgroundColor: "green",
