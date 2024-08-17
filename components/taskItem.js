@@ -6,7 +6,8 @@ const TaskItem = ({ item, index, markTaskDone, editTask, deleteTask , isEditing}
     return (
         <View style={styles.task}>
             {item.status && (
-            <Text style={styles.itemList}>✅</Text>)}
+            <Text style={styles.itemList}>✅</Text>
+            )}
             <Text style={styles.itemList}>{item.label}</Text>
             <View style={styles.taskButtons}>
                 <TouchableOpacity onPress={markTaskDone}>
