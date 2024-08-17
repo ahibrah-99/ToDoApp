@@ -8,28 +8,32 @@ export default function App() {
   const [task, setTaskLabel] = useState("");  // input
   const [editIndex, setEditIndex] = useState(-1);  // edit index
   const [tasks, setTasks] = useState([]);  // task list
+  const [isEditing, setIsEditing] = useState(false);  // task being edited ?
+
 
   // Add or update a task
   function addTask() {
     if (task.trim()) {
-      if (editIndex !== -1) {
-        const updatedTasks = [...tasks];
-        updatedTasks[editIndex].label = task;
-        setTasks(updatedTasks);
-        setEditIndex(-1);
-      } else {
-        setTasks([...tasks, new Task(task)]);
-      }
-      setTaskLabel('');
-      console.log('A task has been added!');
+        if (editIndex !== -1) {
+            const updatedTasks = [...tasks];
+            updatedTasks[editIndex].label = task;
+            setTasks(updatedTasks);
+            setEditIndex(-1);
+            setIsEditing(false);  // Exit edit mode, show delete buttons again
+        } else {
+            setTasks([...tasks, new Task(task)]);
+        }
+        setTaskLabel('');
+        console.log('A task has been added!');
     }
-  }
+}
 
   // Edit task
   function editTask(index) {
     const taskToEdit = tasks[index];
     setTaskLabel(taskToEdit.label);
     setEditIndex(index);
+    setIsEditing(true);  // Enter edit mode
     console.log('A task has been edited!');
   }
 
@@ -37,7 +41,6 @@ export default function App() {
   function markTaskDone(index) {
     const updatedTasks = [...tasks];
     updatedTasks[index].status = 1;
-    //updatedTasks[index].label = updatedTasks[index].label + '  ✅';
     setTasks(updatedTasks);
     console.log('A task has been marked as done!');
   }
@@ -45,6 +48,7 @@ export default function App() {
   // Delete task
   function deleteTask(index) {
     const updatedTasks = [...tasks];
+    updatedTasks[index].deleted = 1;
     updatedTasks.splice(index, 1);
     setTasks(updatedTasks);
     console.log('A task has been deleted!');
@@ -76,6 +80,7 @@ export default function App() {
             markTaskDone={markTaskDone}
             editTask={editTask}
             deleteTask={deleteTask}
+            isEditing={isEditing}  // Pass isEditing to TaskItem
         />
         )}
       keyExtractor={(item, index) => index.toString()}

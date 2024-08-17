@@ -1,7 +1,7 @@
 import React, {useState} from 'react';
 import { View, Text, TouchableOpacity, StyleSheet } from 'react-native';
 
-const TaskItem = ({ item, index, markTaskDone, editTask, deleteTask }) => {
+const TaskItem = ({ item, index, markTaskDone, editTask, deleteTask , isEditing}) => {
 
     const [isDoneButtonVisible, setDoneButtonVisible] = useState(true);
 
@@ -23,9 +23,11 @@ const TaskItem = ({ item, index, markTaskDone, editTask, deleteTask }) => {
                 <TouchableOpacity onPress={() => editTask(index)}>
                     <Text style={styles.editButton}>Edit</Text>
                 </TouchableOpacity>
-                <TouchableOpacity onPress={() => deleteTask(index)}>
-                    <Text style={styles.deleteButton}>Delete</Text>
-                </TouchableOpacity>
+                {!isEditing && (
+                    <TouchableOpacity onPress={() => deleteTask(index)}>
+                        <Text style={styles.deleteButton}>Delete</Text>
+                    </TouchableOpacity>
+                )}
             </View>
         </View>
     );
