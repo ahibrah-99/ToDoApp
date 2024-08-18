@@ -3,12 +3,55 @@ import { StyleSheet, Text, View, TextInput, TouchableOpacity, FlatList , Image} 
 import Task from './components/Task';
 import TaskItem from './components/taskItem';
 
+/* Save and Load data using AsyncStorage API */
+import AsyncStorage from '@react-native-async-storage/async-storage'; //install using npm install @react-native-async-storage/async-storage
+import { useEffect } from 'react';
+/*
+import { saveTasksToStorage } from './components/saveData';
+import { loadTasksFromStorage } from './components/loadData';
+*/
+async function loadTasksFromStorage() {
+  try {
+    const jsonValue = await AsyncStorage.getItem('tasks');
+    return jsonValue != null ? JSON.parse(jsonValue) : [];
+  } catch (e) {
+    console.error('Failed to load tasks:', e);
+    return [];
+  }
+}
+
+async function saveTasksToStorage(tasks) {
+  try {
+    const jsonValue = JSON.stringify(tasks);
+    await AsyncStorage.setItem('tasks', jsonValue);
+    console.log('Tasks saved successfully!');
+  } catch (e) {
+    console.error('Failed to save tasks:', e);
+  }
+}
+
+
 export default function App() {
 
   const [task, setTaskLabel] = useState("");  // input
   const [editIndex, setEditIndex] = useState(-1);  // edit index
   const [tasks, setTasks] = useState([]);  // task list
   const [isEditing, setIsEditing] = useState(false);  // task being edited ?
+
+  useEffect(() => {
+    // Load tasks from storage when the app starts
+    const fetchTasks = async () => {
+      const loadedTasks = await loadTasksFromStorage();
+      setTasks(loadedTasks);
+    };
+
+    fetchTasks();
+  }, []);
+
+  // Save tasks whenever they change
+  useEffect(() => {
+    saveTasksToStorage(tasks);
+  }, [tasks]);
 
 
   // Add or update a task
