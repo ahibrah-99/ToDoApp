@@ -49,6 +49,7 @@ export default function App() {
   function deleteTask(index) {
     const updatedTasks = [...tasks];
     updatedTasks[index].deleted = 1;
+    console.log(`${updatedTasks[index].label} is now being deleted... ${updatedTasks[index].deleted}`)
     updatedTasks.splice(index, 1);
     setTasks(updatedTasks);
     console.log('A task has been deleted!');
@@ -108,7 +109,7 @@ const styles = StyleSheet.create({
   fontSize: 30,
   fontWeight: "bold",
   marginBottom: 7,
-  color: "green",
+  color: "black",
   },
   input: {
   borderWidth: 3,
@@ -120,7 +121,7 @@ const styles = StyleSheet.create({
   width: '70%'
   },
   addButton: {
-  backgroundColor: "green",
+  backgroundColor: "black",
   padding: 10,
   borderRadius: 5,
   marginBottom: 10,

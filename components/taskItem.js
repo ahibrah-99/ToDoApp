@@ -1,14 +1,16 @@
-import React, {useState} from 'react';
 import { View, Text, TouchableOpacity, StyleSheet } from 'react-native';
 
 const TaskItem = ({ item, index, markTaskDone, editTask, deleteTask , isEditing}) => {
 
     return (
         <View style={styles.task}>
+            
             {item.status && (
             <Text style={styles.itemList}>✅</Text>
             )}
+
             <Text style={styles.itemList}>{item.label}</Text>
+            
             <View style={styles.taskButtons}>
                 <TouchableOpacity onPress={markTaskDone}>
                     <Text style={styles.editButton}>Done</Text>
@@ -22,6 +24,7 @@ const TaskItem = ({ item, index, markTaskDone, editTask, deleteTask , isEditing}
                     </TouchableOpacity>
                 )}
             </View>
+        
         </View>
     );
 };
@@ -44,7 +47,7 @@ const styles = StyleSheet.create({
     },
     editButton: {
         marginRight: 10,
-        color: "green",
+        color: "black",
         fontWeight: "bold",
         fontSize: 18,
     },
