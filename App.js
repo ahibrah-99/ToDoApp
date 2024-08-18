@@ -39,6 +39,8 @@ export default function App() {
 
   // Mark task as done
   function markTaskDone(index) {
+    console.log('Tasks:', tasks);
+    console.log('Index:', index);
     const updatedTasks = [...tasks];
     updatedTasks[index].status = 1;
     setTasks(updatedTasks);
@@ -53,6 +55,7 @@ export default function App() {
     updatedTasks.splice(index, 1);
     setTasks(updatedTasks);
     console.log('A task has been deleted!');
+    console.log(updatedTasks);
   }
 
   return (
