@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { StyleSheet, Text, View, TextInput, TouchableOpacity, FlatList , Image} from 'react-native';
-import Task from './components/Task';
-import TaskItem from './components/taskItem';
+import Task from './src/components/Task';
+import TaskItem from './src/components/taskItem';
 
 /* Save and Load data using AsyncStorage API */
 import AsyncStorage from '@react-native-async-storage/async-storage'; //install using npm install @react-native-async-storage/async-storage
