@@ -2,12 +2,12 @@
 import { configureStore } from '@reduxjs/toolkit'   // Before use : npm install @reduxjs/toolkit
 import { combineReducers } from '@reduxjs/toolkit';
 
-// rootReducer
+// rootReducer -- What should we return ?
 const rootReducer = () => {
     return null;
 }
 
-// reducers combined
+// reducers combined method => Further detes for report
 const reducers = combineReducers({
     root: rootReducer
 });
