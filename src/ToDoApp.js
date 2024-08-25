@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { StyleSheet, Text, View, TextInput, TouchableOpacity, FlatList , Image} from 'react-native';
 
+const editIndex = -1;
 
 class ToDoApp extends Component {
     render() {
@@ -8,6 +9,15 @@ class ToDoApp extends Component {
             <View style={styles.container}>
                 <Image style={styles.Image} source={require("../imgs/ToDoIMG.png")}/>
                 <Text style={styles.heading}>My ToDo List</Text>
+                <TextInput
+                    style={styles.input}
+                    placeholder="Enter task"
+                />
+                <TouchableOpacity style={styles.addButton}>
+                <Text style={styles.addButtonText}>
+                    {editIndex !== -1 ? "Update Task" : "Add Task"}
+                </Text>
+                </TouchableOpacity>
 
             </View>
         );

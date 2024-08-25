@@ -2,15 +2,15 @@ import React, { useState } from 'react';
 import { StyleSheet, Text, View, TextInput, TouchableOpacity, FlatList , Image} from 'react-native';
 import Task from './src/components/Task';
 import TaskItem from './src/components/taskItem';
+
+/* Redux */
 import ToDoApp from './src/ToDoApp';
+import store from './src/store';
+import { Provider } from 'react-redux';
 
 /* Save and Load data using AsyncStorage API */
 import AsyncStorage from '@react-native-async-storage/async-storage'; //install using npm install @react-native-async-storage/async-storage
 import { useEffect } from 'react';
-/*
-import { saveTasksToStorage } from './components/saveData';
-import { loadTasksFromStorage } from './components/loadData';
-*/
 async function loadTasksFromStorage() {
   try {
     const jsonValue = await AsyncStorage.getItem('tasks');
@@ -103,6 +103,8 @@ export default function App() {
   }
 
   return (
-    <ToDoApp />
+    <Provider store={store}>
+      <ToDoApp />
+    </Provider>
   );
 }
